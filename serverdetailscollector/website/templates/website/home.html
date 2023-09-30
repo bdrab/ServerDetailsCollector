@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block head-content %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <script defer src="{% static 'js/home.js' %}" ></script>
+{% endblock %}
+
+
+{% block body-content %}
+<div class="modals">
+     <div class="add-device-div hide">
+          <div class="">
+               <button type="button" class="btn btn-outline-secondary btn-submit close-modal-div-btn">✕</button><br>
+               <h4>Add a new device</h4><br>
+               <h6>hostname: <input  class="input-border" type="text" id="device-hostname"></h6>
+               <h6>ip: <input  class="input-border" type="text" id="device-ip"></h6>
+               <h6>port: <input  class="input-border" type="text" id="device-port"></h6>
+               <br>
+               <button type="button" class="btn btn-outline-secondary btn-submit add-device-btn-submit">Submit</button><br>
+          </div>
+     </div>
+</div>
+<div class="body-content">
+     <div class="table-div">
+          <button type="button" class="btn btn-outline-secondary" id="add-device-btn">Add Device</button>
+          <a href="/download"><button type="button" class="btn btn-outline-secondary" id="download-csv-btn">Download csv</button></a><br><br>
+          <a href="/refresh"><button type="button" class="btn btn-outline-secondary" id="refresh-data-btn">Refresh Data</button></a>
+
+          <table class="table table-striped">
+               <thead>
+                    <tr>
+                         <th scope="col">#</th>
+                         <th scope="col">hostname</th>
+                         <th scope="col">port</th>
+                         <th scope="col">IP</th>
+                         <th scope="col">System</th>
+                         <th scope="col">Available space</th>
+                         <th scope="col">Free space</th>
+                         <th scope="col">Options</th>
+                    </tr>
+               </thead>
+               <tbody>
+               {% for device in devices %}
+               <tr>
+                    <th scope="row">{{device.pk}}</th>
+                    <td>{{device.hostname}}</td>
+                    <td>{{device.port}}</td>
+                    <td>{{device.ip}}</td>
+                    <td>{{device.system}}</td>
+                    <td>{{device.available_space}}</td>
+                    <td>{{device.free_space}}</td>
+                    <td><img src="{% static 'img/refresh.png' %}" class="refresh-img"></td>
+               </tr>
+               {% endfor %}
+               </tbody>
+          </table>
+     </div>
+</div>
+{% endblock %}

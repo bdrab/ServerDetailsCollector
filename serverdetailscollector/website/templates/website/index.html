@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block head-content %}
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <script defer src="{% static 'js/index.js' %}" ></script>
+{% endblock %}
+
+
+{% block body-content %}
+
+
+
+<div class="body-content">
+     <div class="home-img">
+          <img src="{% static 'img/home.png' %}" class="home-image">
+          <div class="message-div">
+               {% for message in messages %}
+                    <h6>{{message}}</h6>
+               {% endfor %}
+          </div>
+     </div>
+<!--     <img src="{% static 'img/home.png' %}" class="home-img">-->
+
+
+     <div class="loading-div hide">
+          <div class="loading-animation">
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+          </div>
+     </div>
+
+     <div class="login-div hide">
+          <div class="login-form">
+               <form method="POST" action="/login">
+                    {% csrf_token %}
+                    <label for="username-field">Username:</label><br>
+                    <input type="text" name="username" id="username-field" placeholder="Enter Username" autofocus/>
+                    <br>
+                    <label for="password-field">Password:</label><br>
+                    <input type="password" name="password" id="password-field" placeholder="Enter Password"/>
+                    <br><br>
+                    <input type="submit" value="Login" class="login-submit-btn"/>
+               </form>
+          </div>
+   </div>
+
+</div>
+
+
+
+{% endblock %}
